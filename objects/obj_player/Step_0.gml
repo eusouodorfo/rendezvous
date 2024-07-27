@@ -9,22 +9,74 @@ chao = place_meeting(x, y + 1, obj_plat);
 
 //-------controles
 
-var _left, _right, _jump;
+var left, right, jump, avanco_h;
 
-_left = keyboard_check(ord("A"));
-_right = keyboard_check(ord("D"));
-_jump = keyboard_check(ord("K"));
+left = keyboard_check(ord("A"));
+right = keyboard_check(ord("D"));
+jump = keyboard_check(ord("K"));
 
+//---config info de movimentacao
 
-//------- velocidade horizontal
-velh = (_right - _left) * max_velh;
+avanco_h = (right - left) * max_velh;
+if(chao) acel = acel_chao;
+else acel = acel_ar;
 
+//------------State Machine 
 
-//------- aplic velocidade vertical/gravidade
-
-if (!chao){
-	velv += grav;
+switch(estado){
+	
+	case state.parado:
+	
+		velh = 0;
+		velv = 0;
+		
+		//pular
+		if(jump && chao){
+			velv = -max_velv;
+		}
+		
+		//apply gravity 
+		if(!chao) velv += grav;
+		
+		//saindo do estado
+		if(abs(velh) > 0 || abs(velv) > 0 || left || right || jump){
+			estado = state.movendo;
+		}
+		
+		break;
+		
+	case state.movendo:
+		
+		//aplicando mov.
+		velh = lerp(velh, avanco_h, acel);
+		
+		
+		//gravidade
+		if(!chao) velv += grav;
+		
+		//pulando
+		if(chao && jump){
+			velv = -max_velv;
+			
+			//scale
+			xscale = 0.5;
+			yscale = 1.5;
+		}
+		
+		break;
+		
+	case state.dash:
+	
+		break;
 }
+
+//------debug estado
+
+show_debug_message(estado);
+
+//---voltando escala
+xscale = lerp(xscale, 1, 0.15);
+yscale = lerp(yscale, 1, 0.15);
 
 //---- limitando as velocidades
 

@@ -25,6 +25,3 @@ if(place_meeting(x, y + velv, obj_plat)){
 x += velh;
 y += velv;
 
-//--- teste para commit
-
-//teste com git bash
