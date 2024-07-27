@@ -9,3 +9,8 @@ if(temp && !chao){
 	xscale = 1.6;
 	yscale = 0.5;
 }
+
+
+
+//-----restart game 
+if(keyboard_check_pressed(vk_enter)) room_restart();

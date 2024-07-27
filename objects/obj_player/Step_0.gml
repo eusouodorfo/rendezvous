@@ -7,13 +7,21 @@
 
 chao = place_meeting(x, y + 1, obj_plat);
 
+//----------timer pulo
+if(chao){
+	timer_pulo = limite_pulo;
+}
+else {
+	if(timer_pulo > 0) timer_pulo--;
+}
+
 //-------controles
 
 var left, right, jump, avanco_h;
 
 left = keyboard_check(ord("A"));
 right = keyboard_check(ord("D"));
-jump = keyboard_check(ord("K"));
+jump = keyboard_check_pressed(ord("K"));
 
 //---config info de movimentacao
 
@@ -55,7 +63,7 @@ switch(estado){
 		if(!chao) velv += grav;
 		
 		//pulando
-		if(chao && jump){
+		if(jump && (chao || timer_pulo)){
 			velv = -max_velv;
 			
 			//scale

@@ -17,6 +17,10 @@ velv = 0;
 max_velh = 6;
 max_velv = 8;
 
+//-----coyote time
+limite_pulo = 6;
+timer_pulo = limite_pulo;
+
 
 //----- variaveis de controle
 
