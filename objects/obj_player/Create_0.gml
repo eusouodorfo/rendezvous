@@ -16,10 +16,15 @@ velv = 0;
 
 max_velh = 6;
 max_velv = 8;
+len = 10;
 
 //-----coyote time
 limite_pulo = 6;
 timer_pulo = limite_pulo;
+
+limite_buffer = 6;
+timer_queda = 0;
+buffer_pulo = false; 
 
 
 //----- variaveis de controle
@@ -27,6 +32,12 @@ timer_pulo = limite_pulo;
 chao = false;
 yscale = 1;
 xscale = 1;
+dura = room_speed/4;
+dir = 0;
+carga = 1;
+
+//--------controlando cor
+sat = 255;
 
 //-------state machine
 enum state 
